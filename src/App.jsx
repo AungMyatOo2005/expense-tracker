@@ -5,7 +5,7 @@ import GlobalProvider from "./context/GlobalState";
 import IncomeExpense from "./components/IncomeExpense";
 import TransactionList from "./components/TransactionList";
 import AddTransaction from "./components/AddTransaction";
-
+import "./App.css";
 const App = () => {
   return (
     <GlobalProvider>

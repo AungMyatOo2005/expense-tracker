@@ -1,0 +1,13 @@
+.icon-trash {
+  animation: trash 0.3s ease-in-out;
+}
+@keyframes trash {
+  0% {
+    transform: translateX(10px);
+    opacity: 0.3;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}

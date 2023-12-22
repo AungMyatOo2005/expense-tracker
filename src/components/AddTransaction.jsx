@@ -47,7 +47,7 @@ const AddTransaction = () => {
           (negative-expensive,positive-income)
         </p>
         <input
-          type="text"
+          type="number"
           name="amount"
           className="border border-gray-500 py-1 px-3 outline-none mt-2"
           placeholder="Enter amount..."

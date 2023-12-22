@@ -11,8 +11,16 @@ const GlobalProvider = ({ children }) => {
       payload: data,
     });
   };
+  const deleteTransaction = (id) => {
+    dispatch({
+      type: "deleteList",
+      payload: id,
+    });
+  };
   return (
-    <GlobalContext.Provider value={{ transaction: state, addTransaction }}>
+    <GlobalContext.Provider
+      value={{ transaction: state, addTransaction, deleteTransaction }}
+    >
       {children}
     </GlobalContext.Provider>
   );
