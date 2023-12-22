@@ -3,14 +3,16 @@ import { GlobalContext } from "../context/GlobalState";
 
 const IncomeExpense = () => {
   const { transaction } = useContext(GlobalContext);
-  const totalIncome = transaction
-    .map((list) => list.amount)
-    .filter((amount) => amount > 0)
-    .reduce((acc, item) => (acc += item));
-  const totalExpense = transaction
-    .map((list) => list.amount)
-    .filter((amount) => amount < 0)
-    .reduce((acc, item) => (acc += item));
+  const income =
+    transaction.length > 0 &&
+    transaction.map((list) => list.amount).filter((amount) => amount > 0);
+  const totalIncome =
+    income.length > 0 && income.reduce((acc, item) => (acc += item));
+  const expense =
+    transaction.length > 0 &&
+    transaction.map((list) => list.amount).filter((amount) => amount < 0);
+  const totalExpense =
+    expense.length > 0 && expense.reduce((acc, item) => (acc += item));
   return (
     <div className="w-full shadow-[rgba(0,_0,_0,_0.24)_0px_3px_8px] py-3 mt-8 px-5 flex items-center justify-center">
       <div className="flex items-center flex-col w-[50%] border-r border-gray-300">

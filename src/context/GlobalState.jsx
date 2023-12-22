@@ -1,14 +1,18 @@
-import { createContext, useState } from "react";
+import { createContext, useReducer } from "react";
+import AppReducer from "./AppReducer";
 
 export const GlobalContext = createContext();
 const GlobalProvider = ({ children }) => {
-  const [transaction, setTransaction] = useState([
-    { id: 1, text: "gaiter", amount: -500 },
-    { id: 2, text: "salary", amount: 2000 },
-    { id: 3, text: "lunch", amount: -100 },
-  ]);
+  const transaction = [];
+  const [state, dispatch] = useReducer(AppReducer, transaction);
+  const addTransaction = (data) => {
+    dispatch({
+      type: "addList",
+      payload: data,
+    });
+  };
   return (
-    <GlobalContext.Provider value={{ transaction }}>
+    <GlobalContext.Provider value={{ transaction: state, addTransaction }}>
       {children}
     </GlobalContext.Provider>
   );
