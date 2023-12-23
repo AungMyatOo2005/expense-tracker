@@ -1,20 +1,18 @@
-import React, { useEffect, useState, useContext } from "react";
+import React, { useContext } from "react";
 import { GlobalContext } from "../context/GlobalState";
 
 const AddHistory = () => {
-  const { transaction } = useContext(GlobalContext);
-  const [lsData, setLsData] = useState([]);
-  useEffect(() => {
-    setLsData(
-      JSON.parse(localStorage.getItem("expense-tracker-transaction")) || []
-    );
-  }, []);
+  const { transaction, lsData, setLsData } = useContext(GlobalContext);
 
   const addLs = () => {
+    const newData = { name: "day_1", transaction, id: Math.random(10000000) };
+    const updatedData = [...lsData, newData];
+
     localStorage.setItem(
       "expense-tracker-transaction",
-      JSON.stringify([...lsData, transaction])
+      JSON.stringify(updatedData)
     );
+    setLsData(updatedData);
   };
 
   return (

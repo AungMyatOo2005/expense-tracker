@@ -1,12 +1,10 @@
 import React, { useContext } from "react";
 import { GlobalContext } from "../context/GlobalState";
 import AddHistory from "./AddHistory";
+import History from "./History";
 
 const Balance = () => {
   const { transaction } = useContext(GlobalContext);
-  const addLs = () => {
-    console.log("lol")
-  };
   const totalAmount =
     transaction.length > 0 &&
     transaction
@@ -19,9 +17,8 @@ const Balance = () => {
 
         <h1 className="text-[30px]">${Number(totalAmount).toFixed(2)}</h1>
       </div>
-      {transaction.length > 0 && (
-        <AddHistory/>
-      )}
+      <History />
+      {transaction.length > 0 && <AddHistory />}
     </div>
   );
 };

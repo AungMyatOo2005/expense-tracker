@@ -1,9 +1,17 @@
-import { createContext, useReducer } from "react";
+import { createContext, useEffect, useReducer, useState } from "react";
 import AppReducer from "./AppReducer";
 
 export const GlobalContext = createContext();
 const GlobalProvider = ({ children }) => {
+  const [lsData, setLsData] = useState([]);
+  useEffect(() => {
+    const storedData =
+      JSON.parse(localStorage.getItem("expense-tracker-transaction")) || [];
+    setLsData(storedData);
+  }, []);
+
   const transaction = [];
+
   const [state, dispatch] = useReducer(AppReducer, transaction);
   const addTransaction = (data) => {
     dispatch({
@@ -11,6 +19,7 @@ const GlobalProvider = ({ children }) => {
       payload: data,
     });
   };
+
   const deleteTransaction = (id) => {
     dispatch({
       type: "deleteList",
@@ -20,7 +29,13 @@ const GlobalProvider = ({ children }) => {
 
   return (
     <GlobalContext.Provider
-      value={{ transaction: state, addTransaction, deleteTransaction}}
+      value={{
+        transaction: state,
+        addTransaction,
+        deleteTransaction,
+        lsData,
+        setLsData,
+      }}
     >
       {children}
     </GlobalContext.Provider>

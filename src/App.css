@@ -1,4 +1,4 @@
-body{
+body {
   background-color: rgb(172, 172, 172);
 }
 
@@ -14,4 +14,20 @@ body{
     transform: translateX(0);
     opacity: 1;
   }
+}
+.drop-down {
+  height: 0;
+  overflow: hidden;
+  transition: height 0.3s cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+.open {
+  height: 80px;
+  overflow-y: auto;
+}
+.open::-webkit-scrollbar {
+  width: 4px;
+}
+.open::-webkit-scrollbar-thumb {
+  border-radius: 5px;
+  background: rgb(3, 3, 20);
 }
