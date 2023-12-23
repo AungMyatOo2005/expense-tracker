@@ -14,7 +14,7 @@ const IncomeExpense = () => {
   const totalExpense =
     expense.length > 0 && expense.reduce((acc, item) => (acc += item));
   return (
-    <div className="w-full shadow-[rgba(0,_0,_0,_0.24)_0px_3px_8px] py-3 mt-8 px-5 flex items-center justify-center">
+    <div className="w-full shadow-[rgba(0,_0,_0,_0.24)_0px_3px_8px] py-3 mt-5 px-5 flex items-center justify-center bg-white">
       <div className="flex items-center flex-col w-[50%] border-r border-gray-300">
         <p className="text-[16px] uppercase font-semibold">Income</p>
         <h5 className="text-green-500 font-semibold text-[20px]">

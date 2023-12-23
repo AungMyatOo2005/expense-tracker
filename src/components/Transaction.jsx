@@ -6,7 +6,7 @@ const Transition = ({ list }) => {
   const [isHover, setIsHover] = useState(false);
   return (
     <div
-      className={`flex items-center justify-between px-2 py-2 shadow-[rgba(0,_0,_0,_0.24)_0px_3px_8px] mt-3 border-r-4 relative ${
+      className={`flex items-center justify-between px-2 py-2 shadow-[rgba(0,_0,_0,_0.24)_0px_3px_8px] mt-3 border-r-4 relative bg-white ${
         list.amount > 0 ? "border-green-500" : "border-red-500"
       }`}
       onMouseEnter={() => setIsHover(true)}
@@ -16,7 +16,7 @@ const Transition = ({ list }) => {
       <h4 className="font-semibold">{list.amount}</h4>
       {isHover && (
         <button
-          className="absolute bg-red-500 left-[-32px] rounded-sm p-2 text-white icon-trash"
+          className="absolute bg-red-500 left-[-32px] rounded-sm p-2 text-white animation-self"
           onClick={() => deleteTransaction(list.id)}
         >
           <TrashIcon className="w-[20px]" />

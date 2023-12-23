@@ -17,9 +17,10 @@ const GlobalProvider = ({ children }) => {
       payload: id,
     });
   };
+
   return (
     <GlobalContext.Provider
-      value={{ transaction: state, addTransaction, deleteTransaction }}
+      value={{ transaction: state, addTransaction, deleteTransaction}}
     >
       {children}
     </GlobalContext.Provider>

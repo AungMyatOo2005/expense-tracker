@@ -10,7 +10,7 @@ const App = () => {
   return (
     <GlobalProvider>
       <div className=" py-14 w-full flex items-center justify-center">
-        <div className="w-[300px] flex items-center flex-col">
+        <div className="min-w-[320px] flex items-center flex-col">
           <Header />
           <Balance />
           <IncomeExpense />

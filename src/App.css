@@ -1,4 +1,8 @@
-.icon-trash {
+body{
+  background-color: rgb(172, 172, 172);
+}
+
+.animation-self {
   animation: trash 0.3s ease-in-out;
 }
 @keyframes trash {

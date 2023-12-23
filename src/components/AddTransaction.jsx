@@ -26,7 +26,7 @@ const AddTransaction = () => {
   };
   return (
     <div className="w-full mt-8 flex flex-col">
-      <h2 className="w-full border-b border-gray-400 font-semibold pb-1 font-Roboto mb-3">
+      <h2 className="w-full border-b border-gray-700 font-semibold pb-1 font-Roboto mb-3">
         Add new transaction
       </h2>
       <form onSubmit={onSubmit} className="flex flex-col">
@@ -54,7 +54,7 @@ const AddTransaction = () => {
           onChange={onChange}
           value={transaction.amount}
         />
-        <button className="bg-[#8577ff] mt-4 py-1 text-white font-semibold">
+        <button className="bg-[#8577ff] mt-4 py-1 text-white font-semibold active:scale-[0.98]">
           Add Transaction
         </button>
       </form>
