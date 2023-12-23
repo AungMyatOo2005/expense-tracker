@@ -1,10 +1,6 @@
 import React, { useContext, useState } from "react";
 import { GlobalContext } from "../context/GlobalState";
-import {
-  ChevronDownIcon,
-  ChevronUpIcon,
-  PlusIcon,
-} from "@heroicons/react/24/solid";
+import { ChevronDownIcon, ChevronUpIcon } from "@heroicons/react/24/solid";
 const History = () => {
   const { lsData } = useContext(GlobalContext);
   const [isToggle, setIsToggle] = useState(false);
@@ -17,7 +13,7 @@ const History = () => {
           onMouseLeave={() => setIsToggle(false)}
         >
           <div className=" flex items-center gap-2 justify-evenly">
-            History{" "}
+            add new
             {isToggle ? (
               <ChevronUpIcon className="w-[18px]" />
             ) : (
@@ -25,7 +21,7 @@ const History = () => {
             )}
           </div>
           <ul
-            className={`absolute flex flex-col bg-[#6e6e6e3f] backdrop-blur-[5px] w-full left-0 rounded-sm drop-down ${
+            className={`absolute flex flex-col bg-[#0000008e] backdrop-blur-[5px] w-full left-0 rounded-sm drop-down text-gray-200 font-normal ${
               isToggle && "open"
             }`}
           >

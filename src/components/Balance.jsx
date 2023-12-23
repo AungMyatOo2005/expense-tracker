@@ -17,8 +17,10 @@ const Balance = () => {
 
         <h1 className="text-[30px]">${Number(totalAmount).toFixed(2)}</h1>
       </div>
-      <History />
-      {transaction.length > 0 && <AddHistory />}
+      <div className="flex flex-col gap-3">
+        <History />
+        {transaction.length > 0 && <AddHistory />}
+      </div>
     </div>
   );
 };

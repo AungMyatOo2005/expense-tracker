@@ -3,16 +3,16 @@ import AppReducer from "./AppReducer";
 
 export const GlobalContext = createContext();
 const GlobalProvider = ({ children }) => {
-  const [lsData, setLsData] = useState([]);
+  const transaction = [];
   useEffect(() => {
     const storedData =
       JSON.parse(localStorage.getItem("expense-tracker-transaction")) || [];
     setLsData(storedData);
   }, []);
-
-  const transaction = [];
-
+  const [lsData, setLsData] = useState([]);
+  const [transactionName, setTransactionName] = useState("");
   const [state, dispatch] = useReducer(AppReducer, transaction);
+  const [currentId, setCurrentId] = useState(false);
   const addTransaction = (data) => {
     dispatch({
       type: "addList",
@@ -35,6 +35,8 @@ const GlobalProvider = ({ children }) => {
         deleteTransaction,
         lsData,
         setLsData,
+        transactionName,
+        setTransactionName,
       }}
     >
       {children}
