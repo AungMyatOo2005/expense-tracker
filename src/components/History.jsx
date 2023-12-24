@@ -3,14 +3,15 @@ import { GlobalContext } from "../context/GlobalState";
 import { ChevronDownIcon, ChevronUpIcon } from "@heroicons/react/24/solid";
 
 const History = () => {
-  const { lsData, setCurrentId, currentId } = useContext(GlobalContext);
+  const { lsData, setCurrentId, currentId, currentData } =
+    useContext(GlobalContext);
   const [isToggle, setIsToggle] = useState(false);
 
   const currentName =
-    currentId && lsData.find((data) => data.id === currentId)?.name
-      ? lsData.find((data) => data.id === currentId).name.length > 8
-        ? `${lsData.find((data) => data.id === currentId).name.slice(0, 8)}...`
-        : lsData.find((data) => data.id === currentId).name
+    currentId && currentData?.name
+      ? currentData.name.length > 8
+        ? `${currentData.name.slice(0, 8)}...`
+        : currentData.name
       : "add new";
 
   return (
@@ -18,6 +19,7 @@ const History = () => {
       {lsData.length > 0 && (
         <div
           className="bg-white w-[120px]  py-1 px-2 rounded-sm shadow-lg relative"
+          onClick={() => setIsToggle((prev) => !prev)}
           onMouseEnter={() => setIsToggle(true)}
           onMouseLeave={() => setIsToggle(false)}
         >

@@ -6,19 +6,15 @@ export const GlobalContext = createContext();
 const GlobalProvider = ({ children }) => {
   const [lsData, setLsData] = useState([]);
   const [currentId, setCurrentId] = useState(false);
-
   useEffect(() => {
     const storedData =
       JSON.parse(localStorage.getItem("expense-tracker-transaction")) || [];
     setLsData(storedData);
   }, []);
-
+  const currentData = lsData.find((data) => data.id === currentId);
   const transaction = [];
   useEffect(() => {
-    const data =
-      (currentId &&
-        lsData.find((data) => data.id === currentId)?.transaction) ||
-      [];
+    const data = currentId && currentData.transaction;
     dispatch({
       type: "init",
       payload: data,
@@ -50,6 +46,7 @@ const GlobalProvider = ({ children }) => {
         setLsData,
         currentId,
         setCurrentId,
+        currentData,
       }}
     >
       {children}

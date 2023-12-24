@@ -2,19 +2,14 @@ import React, { useContext, useEffect, useState } from "react";
 import { GlobalContext } from "../context/GlobalState";
 
 const AddHistory = () => {
-  const { transaction, lsData, setLsData, currentId } =
+  const { transaction, lsData, setLsData, currentId, currentData } =
     useContext(GlobalContext);
   const [transactionName, setTransactionName] = useState("");
   const [toggle, setToggle] = useState(false);
   const [isUpdate, setIsUpdate] = useState(false);
   useEffect(() => {
-    setIsUpdate(
-      currentId &&
-        transaction !== lsData.find((data) => data.id === currentId).transaction
-    );
+    setIsUpdate(currentId && transaction !== currentData.transaction);
   }, [currentId, transaction, lsData]);
-
-  console.log(isUpdate);
 
   const addLs = (e) => {
     e.preventDefault();
