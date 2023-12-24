@@ -2,17 +2,31 @@ import { createContext, useEffect, useReducer, useState } from "react";
 import AppReducer from "./AppReducer";
 
 export const GlobalContext = createContext();
+
 const GlobalProvider = ({ children }) => {
-  const transaction = [];
+  const [lsData, setLsData] = useState([]);
+  const [currentId, setCurrentId] = useState(false);
+
   useEffect(() => {
     const storedData =
       JSON.parse(localStorage.getItem("expense-tracker-transaction")) || [];
     setLsData(storedData);
   }, []);
-  const [lsData, setLsData] = useState([]);
-  const [transactionName, setTransactionName] = useState("");
+
+  const transaction = [];
+  useEffect(() => {
+    const data =
+      (currentId &&
+        lsData.find((data) => data.id === currentId)?.transaction) ||
+      [];
+    dispatch({
+      type: "init",
+      payload: data,
+    });
+  }, [lsData, currentId]);
+
   const [state, dispatch] = useReducer(AppReducer, transaction);
-  const [currentId, setCurrentId] = useState(false);
+
   const addTransaction = (data) => {
     dispatch({
       type: "addList",
@@ -26,7 +40,6 @@ const GlobalProvider = ({ children }) => {
       payload: id,
     });
   };
-
   return (
     <GlobalContext.Provider
       value={{
@@ -35,8 +48,8 @@ const GlobalProvider = ({ children }) => {
         deleteTransaction,
         lsData,
         setLsData,
-        transactionName,
-        setTransactionName,
+        currentId,
+        setCurrentId,
       }}
     >
       {children}

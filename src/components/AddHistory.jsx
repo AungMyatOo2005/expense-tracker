@@ -1,15 +1,20 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { GlobalContext } from "../context/GlobalState";
 
 const AddHistory = () => {
-  const {
-    transaction,
-    lsData,
-    setLsData,
-    transactionName,
-    setTransactionName,
-  } = useContext(GlobalContext);
+  const { transaction, lsData, setLsData, currentId } =
+    useContext(GlobalContext);
+  const [transactionName, setTransactionName] = useState("");
   const [toggle, setToggle] = useState(false);
+  const [isUpdate, setIsUpdate] = useState(false);
+  useEffect(() => {
+    setIsUpdate(
+      currentId &&
+        transaction !== lsData.find((data) => data.id === currentId).transaction
+    );
+  }, [currentId, transaction, lsData]);
+
+  console.log(isUpdate);
 
   const addLs = (e) => {
     e.preventDefault();
@@ -33,16 +38,51 @@ const AddHistory = () => {
     }
   };
 
+  const currentDataUpdate = (e) => {
+    e.preventDefault();
+    const updatedData = lsData.map((data) =>
+      data.id === currentId
+        ? {
+            ...data,
+            transaction: transaction,
+            name: transactionName ? transactionName : data.name,
+          }
+        : data
+    );
+
+    localStorage.setItem(
+      "expense-tracker-transaction",
+      JSON.stringify(updatedData)
+    );
+    setToggle(false);
+    setLsData(updatedData);
+    setIsUpdate(false);
+  };
   return (
     <div className="flex flex-col items-end gap-4">
-      <button
-        className="bg-[#8577ff] text-white py-1 px-3 rounded-md text-[12px] animation-self active:scale-[0.98]"
-        onClick={() => setToggle((prev) => !prev)}
-      >
-        Add to history
-      </button>
+      {currentId ? (
+        isUpdate && (
+          <button
+            className="bg-[#8577ff] text-white py-1 px-3 rounded-md text-[12px] animation-self active:scale-[0.98]"
+            onClick={() => setToggle((prev) => !prev)}
+          >
+            Update current data
+          </button>
+        )
+      ) : (
+        <button
+          className="bg-[#8577ff] text-white py-1 px-3 rounded-md text-[12px] animation-self active:scale-[0.98]"
+          onClick={() => setToggle((prev) => !prev)}
+        >
+          Add to history
+        </button>
+      )}
+
       {toggle && (
-        <form className="flex gap-2 animation-self" onSubmit={addLs}>
+        <form
+          className="flex gap-2 animation-self"
+          onSubmit={isUpdate ? currentDataUpdate : addLs}
+        >
           <input
             type="text"
             value={transactionName}

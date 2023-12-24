@@ -4,9 +4,10 @@ const expenseReducer = (state, action) => {
       return [...state, action.payload];
     case "deleteList":
       return state.filter((list) => list.id !== action.payload);
+    case "init":
+      return action.payload;
     default:
       return state;
   }
 };
-
 export default expenseReducer;

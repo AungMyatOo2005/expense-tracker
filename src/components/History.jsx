@@ -1,9 +1,18 @@
 import React, { useContext, useState } from "react";
 import { GlobalContext } from "../context/GlobalState";
 import { ChevronDownIcon, ChevronUpIcon } from "@heroicons/react/24/solid";
+
 const History = () => {
-  const { lsData } = useContext(GlobalContext);
+  const { lsData, setCurrentId, currentId } = useContext(GlobalContext);
   const [isToggle, setIsToggle] = useState(false);
+
+  const currentName =
+    currentId && lsData.find((data) => data.id === currentId)?.name
+      ? lsData.find((data) => data.id === currentId).name.length > 8
+        ? `${lsData.find((data) => data.id === currentId).name.slice(0, 8)}...`
+        : lsData.find((data) => data.id === currentId).name
+      : "add new";
+
   return (
     <>
       {lsData.length > 0 && (
@@ -12,8 +21,8 @@ const History = () => {
           onMouseEnter={() => setIsToggle(true)}
           onMouseLeave={() => setIsToggle(false)}
         >
-          <div className=" flex items-center gap-2 justify-evenly">
-            add new
+          <div className="flex items-center gap-2 justify-evenly">
+            {currentName}
             {isToggle ? (
               <ChevronUpIcon className="w-[18px]" />
             ) : (
@@ -27,7 +36,7 @@ const History = () => {
           >
             <li
               className={`py-2 px-2 cursor-pointer hover:bg-[#80a8ff4d] border-b border-black`}
-              onClick={() => console.log("lol")}
+              onClick={() => setCurrentId(false)}
             >
               add new
             </li>
@@ -37,9 +46,11 @@ const History = () => {
                   lsData.length - 1 > index && "border-b border-black"
                 } py-2 px-2 cursor-pointer hover:bg-[#80a8ff4d]`}
                 key={data.id}
-                onClick={() => console.log(data.id)}
+                onClick={() => setCurrentId(data.id)}
               >
-                {data.name}
+                {data.name.length > 10
+                  ? `${data.name.slice(0, 10)}...`
+                  : data.name}
               </li>
             ))}
           </ul>
