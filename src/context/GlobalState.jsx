@@ -11,10 +11,11 @@ const GlobalProvider = ({ children }) => {
       JSON.parse(localStorage.getItem("expense-tracker-transaction")) || [];
     setLsData(storedData);
   }, []);
+
   const currentData = lsData.find((data) => data.id === currentId);
   const transaction = [];
   useEffect(() => {
-    const data = currentId && currentData.transaction;
+    const data = (currentId && currentData.transaction) || [];
     dispatch({
       type: "init",
       payload: data,
